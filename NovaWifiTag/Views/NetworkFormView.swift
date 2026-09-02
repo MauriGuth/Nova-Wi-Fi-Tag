@@ -102,7 +102,7 @@ struct NetworkFormView: View {
             return "El SSID debe tener entre 1 y 32 bytes."
         }
         if security.requiresPassword, !WifiJoiner.isValidWPAPassphrase(password) {
-            return "La clave debe tener entre 8 y 63 caracteres (o 64 hexadecimales)."
+            return "La clave debe tener entre 8 y 63 caracteres."
         }
         if !TagCredentials.isValidTagId(tagId) {
             return "El Tag ID solo puede tener letras, números, guion y guion bajo (máximo 64)."

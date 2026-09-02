@@ -136,8 +136,8 @@ def main() -> None:
     tag_id = args.id
     if not tag_id or len(tag_id) > 64 or not all(c.isalnum() and c.isascii() or c in "-_" for c in tag_id):
         sys.exit("tagId inválido: solo letras, números, guion y guion bajo (máx. 64).")
-    if args.security != "OPEN" and not (8 <= len(args.password.encode()) <= 63 or len(args.password) == 64):
-        sys.exit("La clave WPA debe tener entre 8 y 63 caracteres (o 64 hexadecimales).")
+    if args.security != "OPEN" and not (8 <= len(args.password.encode()) <= 63):
+        sys.exit("La clave WPA debe tener entre 8 y 63 caracteres (iOS no acepta la PSK de 64 hex).")
     if not (1 <= len(args.ssid.encode()) <= 32):
         sys.exit("El SSID debe tener entre 1 y 32 bytes.")
 

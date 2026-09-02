@@ -68,7 +68,7 @@ enum WifiJoiner {
     }
 
     /// Construye la configuración validando antes los límites de iOS
-    /// (SSID de 1–32 bytes, clave WPA de 8–63 caracteres o 64 hex).
+    /// (SSID de 1–32 bytes, clave WPA de 8–63 caracteres).
     static func makeConfiguration(for credentials: TagCredentials) throws -> NEHotspotConfiguration {
         let ssidLength = credentials.ssid.utf8.count
         guard ssidLength >= 1, ssidLength <= 32 else { throw WifiJoinError.invalidSSID }
@@ -80,11 +80,9 @@ enum WifiJoiner {
         return NEHotspotConfiguration(ssid: credentials.ssid)
     }
 
+    /// NEHotspotConfiguration solo acepta frases de 8 a 63 caracteres (no la PSK de 64 hex).
     static func isValidWPAPassphrase(_ passphrase: String) -> Bool {
         let length = passphrase.utf8.count
-        if length == 64 {
-            return passphrase.allSatisfy { $0.isHexDigit }
-        }
         return length >= 8 && length <= 63
     }
 
