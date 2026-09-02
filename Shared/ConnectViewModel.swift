@@ -53,6 +53,10 @@ final class ConnectViewModel: ObservableObject {
             phase = .failed("Este enlace no corresponde a un sticker Nova Wi-Fi Tag.")
             return
         }
+        // La misma invocación puede llegar por onContinueUserActivity y onOpenURL: no repetir la descarga.
+        if tagId == self.tagId, phase == .loading || phase == .ready || phase == .connecting || phase == .connected {
+            return
+        }
         Task {
             await self.load(tagId: tagId)
         }

@@ -16,6 +16,9 @@ struct NovaWifiTagClipApp: App {
                     guard let url = activity.webpageURL else { return }
                     model.handleInvocation(url: url)
                 }
+                .onOpenURL { url in
+                    model.handleInvocation(url: url)
+                }
         }
     }
 }
