@@ -1,0 +1,112 @@
+# Nova Wi-Fi Tag — especificación XcodeGen.
+#
+#   brew install xcodegen      # si falta
+#   xcodegen generate          # crea NovaWifiTag.xcodeproj
+#
+# Reemplazá TEAMID por tu Team ID de Apple Developer (scripts/set-team-id.sh XXXXXXXXXX).
+name: NovaWifiTag
+
+options:
+  bundleIdPrefix: ar.novasolutions
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "15.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: false
+  groupSortPosition: top
+
+configs:
+  Debug: debug
+  Release: release
+
+settings:
+  base:
+    # Compilador Swift 5.9+ en modo de lenguaje 5 (SWIFT_VERSION solo acepta 4, 4.2, 5 o 6).
+    SWIFT_VERSION: "5.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    DEVELOPMENT_TEAM: TEAMID
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    GENERATE_INFOPLIST_FILE: "NO"
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+    ENABLE_PREVIEWS: "YES"
+    SWIFT_EMIT_LOC_STRINGS: "YES"
+  configs:
+    Debug:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+      SWIFT_OPTIMIZATION_LEVEL: -Onone
+    Release:
+      SWIFT_OPTIMIZATION_LEVEL: -O
+      SWIFT_COMPILATION_MODE: wholemodule
+
+targets:
+  # App completa: lista de redes (Keychain), "Conectarme" y "Grabar sticker".
+  NovaWifiTag:
+    type: application
+    platform: iOS
+    sources:
+      - path: NovaWifiTag
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ar.novasolutions.wifitag
+        PRODUCT_NAME: NovaWifiTag
+        INFOPLIST_FILE: NovaWifiTag/Info.plist
+    entitlements:
+      path: NovaWifiTag/NovaWifiTag.entitlements
+    dependencies:
+      # El App Clip se embebe en la app ("Embed App Clips").
+      - target: NovaWifiTagClip
+        embed: true
+        codeSign: true
+
+  # App Clip: una sola pantalla, invocado por NFC/URL. Debe pesar mucho menos de 15 MB.
+  NovaWifiTagClip:
+    type: application.on-demand-install-capable
+    platform: iOS
+    sources:
+      - path: NovaWifiTagClip
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ar.novasolutions.wifitag.Clip
+        PRODUCT_NAME: NovaWifiTagClip
+        INFOPLIST_FILE: NovaWifiTagClip/Info.plist
+    entitlements:
+      path: NovaWifiTagClip/NovaWifiTagClip.entitlements
+
+schemes:
+  NovaWifiTag:
+    build:
+      targets:
+        NovaWifiTag: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  NovaWifiTagClip:
+    build:
+      targets:
+        NovaWifiTagClip: all
+    run:
+      config: Debug
+      # Simula la invocación por NFC/URL al correr el clip desde Xcode.
+      environmentVariables:
+        - variable: _XCAppClipURL
+          value: https://wifi.novasolutions.ar/t/casa
+          isEnabled: true
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

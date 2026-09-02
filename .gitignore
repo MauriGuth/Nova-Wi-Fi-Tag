@@ -1,0 +1,16 @@
+# Generado por XcodeGen (regenerar con `xcodegen generate`)
+*.xcodeproj/
+*.xcworkspace/
+# Xcode
+build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.ipa
+*.dSYM.zip
+# Vercel / SO / Python
+web/.vercel/
+.vercel/
+.DS_Store
+__pycache__/
+*.pyc

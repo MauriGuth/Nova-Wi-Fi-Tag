@@ -1,0 +1,7 @@
+{
+  "id": "demo",
+  "name": "Red de prueba Nova",
+  "ssid": "NovaDemo",
+  "password": "demo-2026-nova",
+  "security": "WPA2"
+}

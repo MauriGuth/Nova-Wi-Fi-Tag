@@ -1,0 +1,5 @@
+gen.py
+templates/
+README.md
+__pycache__/
+*.pyc

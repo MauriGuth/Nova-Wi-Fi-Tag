@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ConsentText</key>
+	<dict>
+		<key>default</key>
+		<string>Este perfil solo agrega la red Wi-Fi “NovaDemo” a tu iPhone. No instala nada más y puedes eliminarlo cuando quieras desde Ajustes → General → VPN y gestión de dispositivos.</string>
+	</dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>AutoJoin</key>
+			<true/>
+			<key>EncryptionType</key>
+			<string>WPA2</string>
+			<key>HIDDEN_NETWORK</key>
+			<false/>
+			<key>IsHotspot</key>
+			<false/>
+			<key>Password</key>
+			<string>demo-2026-nova</string>
+			<key>PayloadDescription</key>
+			<string>Agrega la red Wi-Fi “NovaDemo” y se conecta automáticamente.</string>
+			<key>PayloadDisplayName</key>
+			<string>Red Wi-Fi NovaDemo</string>
+			<key>PayloadIdentifier</key>
+			<string>ar.novasolutions.wifi.demo.wifi</string>
+			<key>PayloadOrganization</key>
+			<string>Nova Solutions</string>
+			<key>PayloadType</key>
+			<string>com.apple.wifi.managed</string>
+			<key>PayloadUUID</key>
+			<string>056E7C35-280D-56A3-971E-8514E5CC1D7F</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>ProxyType</key>
+			<string>None</string>
+			<key>SSID_STR</key>
+			<string>NovaDemo</string>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Instala este perfil para conectarte a la red Wi-Fi “NovaDemo” sin escribir la clave.</string>
+	<key>PayloadDisplayName</key>
+	<string>Red de prueba Nova</string>
+	<key>PayloadIdentifier</key>
+	<string>ar.novasolutions.wifi.demo</string>
+	<key>PayloadOrganization</key>
+	<string>Nova Solutions</string>
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>1EF1E374-A074-50FC-AE7E-C35802FA998A</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

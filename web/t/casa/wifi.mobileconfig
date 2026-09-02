@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ConsentText</key>
+	<dict>
+		<key>default</key>
+		<string>Este perfil solo agrega la red Wi-Fi “IPLAN-925365-5G” a tu iPhone. No instala nada más y puedes eliminarlo cuando quieras desde Ajustes → General → VPN y gestión de dispositivos.</string>
+	</dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>AutoJoin</key>
+			<true/>
+			<key>EncryptionType</key>
+			<string>WPA2</string>
+			<key>HIDDEN_NETWORK</key>
+			<false/>
+			<key>IsHotspot</key>
+			<false/>
+			<key>Password</key>
+			<string>Huentelaf-1</string>
+			<key>PayloadDescription</key>
+			<string>Agrega la red Wi-Fi “IPLAN-925365-5G” y se conecta automáticamente.</string>
+			<key>PayloadDisplayName</key>
+			<string>Red Wi-Fi IPLAN-925365-5G</string>
+			<key>PayloadIdentifier</key>
+			<string>ar.novasolutions.wifi.casa.wifi</string>
+			<key>PayloadOrganization</key>
+			<string>Mauri</string>
+			<key>PayloadType</key>
+			<string>com.apple.wifi.managed</string>
+			<key>PayloadUUID</key>
+			<string>B7F22C67-AC4C-542E-B5A9-EC0519AD9087</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>ProxyType</key>
+			<string>None</string>
+			<key>SSID_STR</key>
+			<string>IPLAN-925365-5G</string>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Instala este perfil para conectarte a la red Wi-Fi “IPLAN-925365-5G” sin escribir la clave.</string>
+	<key>PayloadDisplayName</key>
+	<string>Wi-Fi de Mauri</string>
+	<key>PayloadIdentifier</key>
+	<string>ar.novasolutions.wifi.casa</string>
+	<key>PayloadOrganization</key>
+	<string>Mauri</string>
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>9A10502A-4818-5D6F-B476-238181079605</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
