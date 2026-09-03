@@ -1,4 +1,5 @@
 import Foundation
+import Network
 import NetworkExtension
 
 enum WifiJoinError: LocalizedError {
@@ -37,6 +38,17 @@ enum WifiJoinError: LocalizedError {
 /// Se une a la red con `NEHotspotConfigurationManager`. iOS muestra su propio
 /// diálogo de confirmación ("¿Quieres conectarte a la red …?").
 enum WifiJoiner {
+    /// Cómo comprobar, después de `apply`, que la unión a la red funcionó.
+    enum Verification {
+        /// Compara el SSID actual con `NEHotspotNetwork.fetchCurrent`. Requiere el entitlement
+        /// `com.apple.developer.networking.wifi-info` (Access Wi-Fi Information). Lo usa la app.
+        case ssid
+        /// Solo comprueba que haya una ruta Wi-Fi utilizable (`NWPathMonitor`). Lo usa el App Clip,
+        /// que no puede tener el entitlement wifi-info. No distingue entre "se unió a esta red" y
+        /// "ya estaba en otra red Wi-Fi", pero detecta el caso típico del invitado que venía por datos.
+        case wifiInterface
+    }
+
     /// `false` en el simulador, donde NEHotspotConfiguration no funciona.
     static var isSupported: Bool {
         #if targetEnvironment(simulator)
@@ -52,7 +64,7 @@ enum WifiJoiner {
     ///
     /// La comprobación existe porque `apply` puede terminar sin error aunque iOS muestre
     /// "No se pudo conectar a la red" (clave incorrecta, red fuera de alcance, SSID inexistente).
-    static func join(_ credentials: TagCredentials) async throws {
+    static func join(_ credentials: TagCredentials, verification: Verification = .ssid) async throws {
         guard isSupported else { throw WifiJoinError.simulator }
 
         let configuration = try makeConfiguration(for: credentials)
@@ -62,7 +74,14 @@ enum WifiJoiner {
         if alreadyAssociated {
             return
         }
-        guard await waitUntilJoined(ssid: credentials.ssid) else {
+        let joined: Bool
+        switch verification {
+        case .ssid:
+            joined = await waitUntilJoined(ssid: credentials.ssid)
+        case .wifiInterface:
+            joined = await waitForWifiPath()
+        }
+        guard joined else {
             // Limpia la configuración que no sirvió para que el próximo intento parta de cero.
             NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: credentials.ssid)
             throw WifiJoinError.notJoined(ssid: credentials.ssid)
@@ -97,6 +116,20 @@ enum WifiJoiner {
                 continuation.resume(returning: network?.ssid)
             }
         }
+    }
+
+    /// Espera hasta que haya una ruta de red por Wi-Fi utilizable (sin mirar el SSID).
+    private static func waitForWifiPath(attempts: Int = 10) async -> Bool {
+        let monitor = NWPathMonitor(requiredInterfaceType: .wifi)
+        monitor.start(queue: DispatchQueue(label: "ar.novasolutions.wifitag.wifi-path"))
+        defer { monitor.cancel() }
+        for _ in 0..<attempts {
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            if monitor.currentPath.status == .satisfied {
+                return true
+            }
+        }
+        return false
     }
 
     /// Consulta la red actual durante unos segundos hasta que coincida con `ssid`.

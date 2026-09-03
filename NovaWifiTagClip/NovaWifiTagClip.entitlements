@@ -13,7 +13,5 @@
 	</array>
 	<key>com.apple.developer.networking.HotspotConfiguration</key>
 	<true/>
-	<key>com.apple.developer.networking.wifi-info</key>
-	<true/>
 </dict>
 </plist>

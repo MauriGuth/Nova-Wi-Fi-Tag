@@ -19,12 +19,18 @@ final class ConnectViewModel: ObservableObject {
     private(set) var tagId: String?
 
     private let api: TagAPIClient
+    private let verification: WifiJoiner.Verification
 
-    init(credentials: TagCredentials? = nil, api: TagAPIClient = TagAPIClient()) {
+    /// - Parameter verification: `.ssid` en la app (tiene el entitlement wifi-info),
+    ///   `.wifiInterface` en el App Clip.
+    init(credentials: TagCredentials? = nil,
+         api: TagAPIClient = TagAPIClient(),
+         verification: WifiJoiner.Verification = .ssid) {
         self.credentials = credentials
         self.tagId = credentials?.id
         self.phase = credentials == nil ? .idle : .ready
         self.api = api
+        self.verification = verification
     }
 
     var networkName: String { credentials?.name ?? "Red Wi-Fi" }
@@ -92,7 +98,7 @@ final class ConnectViewModel: ObservableObject {
         guard let credentials else { return }
         phase = .connecting
         do {
-            try await WifiJoiner.join(credentials)
+            try await WifiJoiner.join(credentials, verification: verification)
             phase = .connected
         } catch {
             phase = .failed(error.localizedDescription)

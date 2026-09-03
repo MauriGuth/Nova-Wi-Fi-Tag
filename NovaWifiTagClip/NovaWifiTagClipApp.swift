@@ -4,7 +4,8 @@ import SwiftUI
 /// sola pantalla para unirse a la red.
 @main
 struct NovaWifiTagClipApp: App {
-    @StateObject private var model = ConnectViewModel()
+    // El App Clip no puede tener el entitlement wifi-info: verifica la unión por interfaz Wi-Fi.
+    @StateObject private var model = ConnectViewModel(verification: .wifiInterface)
 
     var body: some Scene {
         WindowGroup {
