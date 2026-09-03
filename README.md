@@ -169,6 +169,8 @@ Ya está desplegado en producción (ver "Verificación" al final).
 
 5. Enviá a revisión. Con el build en TestFlight también podés probar el clip: TestFlight → la app → *App Clip Invocations → + Invocation URL*.
 
+> **Si tu Mac corre una macOS beta**, App Store Connect rechaza el build con `ITMS-90111` aunque el Xcode sea de release (mira `BuildMachineOSBuild`). La salida limpia es **Xcode Cloud**, que compila en macOS de release: el `.xcodeproj` está versionado para eso. En Xcode: *Product → Xcode Cloud → Create Workflow*, producto `NovaWifiTag`, entorno "Xcode 26.x (release)", acción *Archive – iOS* con *Distribution Preparation: App Store Connect*, y en *General* poné *Next Build Number* mayor que el último que subiste. Conectá el repo de GitHub cuando lo pida y *Start Build*; el build aparece solo en App Store Connect.
+
 ### 5. Grabar el sticker
 
 - **Con la app**: *Mis redes → + → nombre, SSID `IPLAN-Mauri-5.8GHz`, clave, seguridad, Tag ID `casa` → Guardar → Grabar sticker*. Muestra los dos registros y el tamaño; con URL + Wi-Fi son 124 bytes (entra en NTAG213: 137 bytes). Acercá el sticker cuando iOS lo pida.

@@ -1,5 +1,5 @@
-# Generado por XcodeGen (regenerar con `xcodegen generate`)
-*.xcodeproj/
+# NovaWifiTag.xcodeproj se genera con `xcodegen generate` pero se versiona porque Xcode Cloud lo necesita.
+# Si cambiás project.yml: xcodegen generate y commiteá el .xcodeproj.
 *.xcworkspace/
 # Xcode
 build/
