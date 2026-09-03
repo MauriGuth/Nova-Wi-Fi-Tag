@@ -1,0 +1,590 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		017ED9A7915E028CFA519601 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86C1936599FD91F901AB53CB /* Assets.xcassets */; };
+		1C5DD76029AE9AB635258D55 /* ClipRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD37FBBAF51BE49C648EFB5 /* ClipRootView.swift */; };
+		262959093CC62ACC830502AF /* TagCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7255A52D2D9BD386C0F0301 /* TagCredentials.swift */; };
+		3C18914A581587C0F3B53905 /* NovaWifiTagClipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D20A2948D292A15807BFDE /* NovaWifiTagClipApp.swift */; };
+		3D9F5A8020410A75EACBA725 /* WriteTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064058338AFC428EA74F197B /* WriteTagView.swift */; };
+		43F86F39E7A70FB2EEDD8559 /* NovaWifiTagClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 2CF8CA2BC4C75819396A7E4A /* NovaWifiTagClip.app */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4ECFECC6BBD707E3A0AB4708 /* NetworkFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48E9741BBC953128773249 /* NetworkFormView.swift */; };
+		5507901026A0B690197BC368 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 775CD9D191F27F6A54C69BBE /* PrivacyInfo.xcprivacy */; };
+		55574EA0C8957CE690762CF3 /* NovaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3769D78059FE5AB52A634B /* NovaConfig.swift */; };
+		5B7E3338B008916C484D88DD /* NetworkDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83932C107C6B7275BD2255AC /* NetworkDetailView.swift */; };
+		5CF40F226E212EDEA02E1D6F /* TagCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7255A52D2D9BD386C0F0301 /* TagCredentials.swift */; };
+		63BC3F9EE218B46FF493202C /* NovaWifiTagApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47837F002377BECC25F10C2 /* NovaWifiTagApp.swift */; };
+		6463C32986A5780614E80F11 /* ConnectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1DE4C3A94F7CFD89A2537B /* ConnectViewModel.swift */; };
+		70ED141D50D2F9B1CAB965BA /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9FAB8DDEF4702B3CB6C6CD /* KeychainStorage.swift */; };
+		785753491B137F62EABD7359 /* InvocationURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0457262B3CA2FE4B0A6F3AD9 /* InvocationURL.swift */; };
+		7D5141FB2FBD3184C0F49DD6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2B8F7698E49EE5C13226FA49 /* PrivacyInfo.xcprivacy */; };
+		9A8EE77590E5DB9E98E4D4F7 /* ConnectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5D70EA60298E201836CD3 /* ConnectCardView.swift */; };
+		9FF521053A613CB0F2B3C21D /* WifiJoiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD058BD9B66964863ECF6172 /* WifiJoiner.swift */; };
+		A036E79C229DDE19CD0D492E /* WifiJoiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD058BD9B66964863ECF6172 /* WifiJoiner.swift */; };
+		A14F82CE54B6E60F03B47FD5 /* TagMessageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C07EAB98E49B5B1AF6792 /* TagMessageBuilder.swift */; };
+		A72F4F685A7738178E6A14DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A5F5059F89E3E249E535BF6 /* Assets.xcassets */; };
+		B6E14AEFAFD89A61AB49FF81 /* ConnectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5D70EA60298E201836CD3 /* ConnectCardView.swift */; };
+		BECA2446E254FBDD77890150 /* NovaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3769D78059FE5AB52A634B /* NovaConfig.swift */; };
+		CC1BC4DF49C127136988295A /* WSCPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB423A38A8BC8B2AEAB1AC4 /* WSCPayload.swift */; };
+		CD677C3ABBC6598F562FA6E2 /* ConnectScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FA6683DCCC5945FF7A0BC /* ConnectScreen.swift */; };
+		D21B22FCB0BF2E42B2F33EEE /* NFCTagWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D837785DB976BE0B00FC8CC8 /* NFCTagWriter.swift */; };
+		D3CAB4307FFC7851FE4A229B /* TagAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E64139C01EE0AD5E54B967 /* TagAPIClient.swift */; };
+		DC8D543F89375B90ACC4BD78 /* InvocationURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0457262B3CA2FE4B0A6F3AD9 /* InvocationURL.swift */; };
+		E0BB436FEACF83CFE29A3274 /* TagAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E64139C01EE0AD5E54B967 /* TagAPIClient.swift */; };
+		E253E0A4A0F76EDC468A3A27 /* NetworkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015B288D04D3C9094E519C08 /* NetworkStore.swift */; };
+		E670A58EAAD916EF5B4FEDED /* ConnectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1DE4C3A94F7CFD89A2537B /* ConnectViewModel.swift */; };
+		F4EB3E40B462C55D33E68C5B /* NetworkListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F08FDCA4BA3ED328EBFF26A /* NetworkListView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C208CA0EDE9F14C2F7772B76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1780D77A2FD4279C460513F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F1FEDD9A3D4644961C6A7EB;
+			remoteInfo = NovaWifiTagClip;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1494D242A87A9A409CBC4307 /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				43F86F39E7A70FB2EEDD8559 /* NovaWifiTagClip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		015B288D04D3C9094E519C08 /* NetworkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStore.swift; sourceTree = "<group>"; };
+		0457262B3CA2FE4B0A6F3AD9 /* InvocationURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvocationURL.swift; sourceTree = "<group>"; };
+		064058338AFC428EA74F197B /* WriteTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTagView.swift; sourceTree = "<group>"; };
+		11D20A2948D292A15807BFDE /* NovaWifiTagClipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovaWifiTagClipApp.swift; sourceTree = "<group>"; };
+		1B48E9741BBC953128773249 /* NetworkFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFormView.swift; sourceTree = "<group>"; };
+		1E3769D78059FE5AB52A634B /* NovaConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovaConfig.swift; sourceTree = "<group>"; };
+		286C85DDB3D45884F28A2CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2A5F5059F89E3E249E535BF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B8F7698E49EE5C13226FA49 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2CF8CA2BC4C75819396A7E4A /* NovaWifiTagClip.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = NovaWifiTagClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F1DE4C3A94F7CFD89A2537B /* ConnectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewModel.swift; sourceTree = "<group>"; };
+		53F614061667183ED14E9CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5E5FA6683DCCC5945FF7A0BC /* ConnectScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectScreen.swift; sourceTree = "<group>"; };
+		61AE4EDD5CB7B1652ED1C336 /* NovaWifiTag.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NovaWifiTag.entitlements; sourceTree = "<group>"; };
+		6AD37FBBAF51BE49C648EFB5 /* ClipRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipRootView.swift; sourceTree = "<group>"; };
+		6D9571C22164931FB9BEA832 /* NovaWifiTag.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = NovaWifiTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		775CD9D191F27F6A54C69BBE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		80E64139C01EE0AD5E54B967 /* TagAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAPIClient.swift; sourceTree = "<group>"; };
+		83932C107C6B7275BD2255AC /* NetworkDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDetailView.swift; sourceTree = "<group>"; };
+		86B5D70EA60298E201836CD3 /* ConnectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectCardView.swift; sourceTree = "<group>"; };
+		86C1936599FD91F901AB53CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8F08FDCA4BA3ED328EBFF26A /* NetworkListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListView.swift; sourceTree = "<group>"; };
+		A47837F002377BECC25F10C2 /* NovaWifiTagApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovaWifiTagApp.swift; sourceTree = "<group>"; };
+		A8746FF73E5B12CF1FF3F07B /* NovaWifiTagClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NovaWifiTagClip.entitlements; sourceTree = "<group>"; };
+		B7255A52D2D9BD386C0F0301 /* TagCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCredentials.swift; sourceTree = "<group>"; };
+		BF6C07EAB98E49B5B1AF6792 /* TagMessageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagMessageBuilder.swift; sourceTree = "<group>"; };
+		D837785DB976BE0B00FC8CC8 /* NFCTagWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCTagWriter.swift; sourceTree = "<group>"; };
+		DC9FAB8DDEF4702B3CB6C6CD /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
+		EFB423A38A8BC8B2AEAB1AC4 /* WSCPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSCPayload.swift; sourceTree = "<group>"; };
+		FD058BD9B66964863ECF6172 /* WifiJoiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiJoiner.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		017FDEB3E7AAFE74AEE35F21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5E5FA6683DCCC5945FF7A0BC /* ConnectScreen.swift */,
+				83932C107C6B7275BD2255AC /* NetworkDetailView.swift */,
+				1B48E9741BBC953128773249 /* NetworkFormView.swift */,
+				8F08FDCA4BA3ED328EBFF26A /* NetworkListView.swift */,
+				064058338AFC428EA74F197B /* WriteTagView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4917499909FBA30BA8DACB96 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				86B5D70EA60298E201836CD3 /* ConnectCardView.swift */,
+				2F1DE4C3A94F7CFD89A2537B /* ConnectViewModel.swift */,
+				0457262B3CA2FE4B0A6F3AD9 /* InvocationURL.swift */,
+				1E3769D78059FE5AB52A634B /* NovaConfig.swift */,
+				80E64139C01EE0AD5E54B967 /* TagAPIClient.swift */,
+				B7255A52D2D9BD386C0F0301 /* TagCredentials.swift */,
+				FD058BD9B66964863ECF6172 /* WifiJoiner.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		5308A35C85920D87F535D513 /* NovaWifiTag */ = {
+			isa = PBXGroup;
+			children = (
+				82DFB0541EC6D817B6A247B6 /* NFC */,
+				F448C6D136E7F68AED6D1167 /* Storage */,
+				017FDEB3E7AAFE74AEE35F21 /* Views */,
+				86C1936599FD91F901AB53CB /* Assets.xcassets */,
+				286C85DDB3D45884F28A2CD3 /* Info.plist */,
+				61AE4EDD5CB7B1652ED1C336 /* NovaWifiTag.entitlements */,
+				A47837F002377BECC25F10C2 /* NovaWifiTagApp.swift */,
+				775CD9D191F27F6A54C69BBE /* PrivacyInfo.xcprivacy */,
+			);
+			path = NovaWifiTag;
+			sourceTree = "<group>";
+		};
+		77BC801751BD5352680F0205 /* NovaWifiTagClip */ = {
+			isa = PBXGroup;
+			children = (
+				2A5F5059F89E3E249E535BF6 /* Assets.xcassets */,
+				6AD37FBBAF51BE49C648EFB5 /* ClipRootView.swift */,
+				53F614061667183ED14E9CE1 /* Info.plist */,
+				A8746FF73E5B12CF1FF3F07B /* NovaWifiTagClip.entitlements */,
+				11D20A2948D292A15807BFDE /* NovaWifiTagClipApp.swift */,
+				2B8F7698E49EE5C13226FA49 /* PrivacyInfo.xcprivacy */,
+			);
+			path = NovaWifiTagClip;
+			sourceTree = "<group>";
+		};
+		82DFB0541EC6D817B6A247B6 /* NFC */ = {
+			isa = PBXGroup;
+			children = (
+				D837785DB976BE0B00FC8CC8 /* NFCTagWriter.swift */,
+				BF6C07EAB98E49B5B1AF6792 /* TagMessageBuilder.swift */,
+				EFB423A38A8BC8B2AEAB1AC4 /* WSCPayload.swift */,
+			);
+			path = NFC;
+			sourceTree = "<group>";
+		};
+		939343382B1721D876BB9525 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D9571C22164931FB9BEA832 /* NovaWifiTag.app */,
+				2CF8CA2BC4C75819396A7E4A /* NovaWifiTagClip.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFAFE6C4FE7F5E527820BABF = {
+			isa = PBXGroup;
+			children = (
+				5308A35C85920D87F535D513 /* NovaWifiTag */,
+				77BC801751BD5352680F0205 /* NovaWifiTagClip */,
+				4917499909FBA30BA8DACB96 /* Shared */,
+				939343382B1721D876BB9525 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F448C6D136E7F68AED6D1167 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				DC9FAB8DDEF4702B3CB6C6CD /* KeychainStorage.swift */,
+				015B288D04D3C9094E519C08 /* NetworkStore.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4F1FEDD9A3D4644961C6A7EB /* NovaWifiTagClip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A51AE88917B8D74A9D22FABA /* Build configuration list for PBXNativeTarget "NovaWifiTagClip" */;
+			buildPhases = (
+				63AC3BC63A2C6E0BB1FC9DFA /* Sources */,
+				868D54582F149711CF30282A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NovaWifiTagClip;
+			packageProductDependencies = (
+			);
+			productName = NovaWifiTagClip;
+			productReference = 2CF8CA2BC4C75819396A7E4A /* NovaWifiTagClip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
+		};
+		C89E405D112881D852A6B453 /* NovaWifiTag */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D589464EBCE238CF46A5B196 /* Build configuration list for PBXNativeTarget "NovaWifiTag" */;
+			buildPhases = (
+				74D451AF883D2CA168310E97 /* Sources */,
+				AA33ABDE6E2AE33767E5816C /* Resources */,
+				1494D242A87A9A409CBC4307 /* Embed App Clips */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11F30919DD00BF91F630A782 /* PBXTargetDependency */,
+			);
+			name = NovaWifiTag;
+			packageProductDependencies = (
+			);
+			productName = NovaWifiTag;
+			productReference = 6D9571C22164931FB9BEA832 /* NovaWifiTag.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1780D77A2FD4279C460513F1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					4F1FEDD9A3D4644961C6A7EB = {
+						DevelopmentTeam = ABS5DYM6TB;
+						ProvisioningStyle = Automatic;
+					};
+					C89E405D112881D852A6B453 = {
+						DevelopmentTeam = ABS5DYM6TB;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = AF08716B737E90FA3BDE3006 /* Build configuration list for PBXProject "NovaWifiTag" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = BFAFE6C4FE7F5E527820BABF;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 939343382B1721D876BB9525 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C89E405D112881D852A6B453 /* NovaWifiTag */,
+				4F1FEDD9A3D4644961C6A7EB /* NovaWifiTagClip */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		868D54582F149711CF30282A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A72F4F685A7738178E6A14DA /* Assets.xcassets in Resources */,
+				7D5141FB2FBD3184C0F49DD6 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA33ABDE6E2AE33767E5816C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				017ED9A7915E028CFA519601 /* Assets.xcassets in Resources */,
+				5507901026A0B690197BC368 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		63AC3BC63A2C6E0BB1FC9DFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C5DD76029AE9AB635258D55 /* ClipRootView.swift in Sources */,
+				9A8EE77590E5DB9E98E4D4F7 /* ConnectCardView.swift in Sources */,
+				E670A58EAAD916EF5B4FEDED /* ConnectViewModel.swift in Sources */,
+				DC8D543F89375B90ACC4BD78 /* InvocationURL.swift in Sources */,
+				BECA2446E254FBDD77890150 /* NovaConfig.swift in Sources */,
+				3C18914A581587C0F3B53905 /* NovaWifiTagClipApp.swift in Sources */,
+				D3CAB4307FFC7851FE4A229B /* TagAPIClient.swift in Sources */,
+				262959093CC62ACC830502AF /* TagCredentials.swift in Sources */,
+				A036E79C229DDE19CD0D492E /* WifiJoiner.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74D451AF883D2CA168310E97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6E14AEFAFD89A61AB49FF81 /* ConnectCardView.swift in Sources */,
+				CD677C3ABBC6598F562FA6E2 /* ConnectScreen.swift in Sources */,
+				6463C32986A5780614E80F11 /* ConnectViewModel.swift in Sources */,
+				785753491B137F62EABD7359 /* InvocationURL.swift in Sources */,
+				70ED141D50D2F9B1CAB965BA /* KeychainStorage.swift in Sources */,
+				D21B22FCB0BF2E42B2F33EEE /* NFCTagWriter.swift in Sources */,
+				5B7E3338B008916C484D88DD /* NetworkDetailView.swift in Sources */,
+				4ECFECC6BBD707E3A0AB4708 /* NetworkFormView.swift in Sources */,
+				F4EB3E40B462C55D33E68C5B /* NetworkListView.swift in Sources */,
+				E253E0A4A0F76EDC468A3A27 /* NetworkStore.swift in Sources */,
+				55574EA0C8957CE690762CF3 /* NovaConfig.swift in Sources */,
+				63BC3F9EE218B46FF493202C /* NovaWifiTagApp.swift in Sources */,
+				E0BB436FEACF83CFE29A3274 /* TagAPIClient.swift in Sources */,
+				5CF40F226E212EDEA02E1D6F /* TagCredentials.swift in Sources */,
+				A14F82CE54B6E60F03B47FD5 /* TagMessageBuilder.swift in Sources */,
+				CC1BC4DF49C127136988295A /* WSCPayload.swift in Sources */,
+				9FF521053A613CB0F2B3C21D /* WifiJoiner.swift in Sources */,
+				3D9F5A8020410A75EACBA725 /* WriteTagView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		11F30919DD00BF91F630A782 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F1FEDD9A3D4644961C6A7EB /* NovaWifiTagClip */;
+			targetProxy = C208CA0EDE9F14C2F7772B76 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		016D5C1790ADECEB3E757034 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NovaWifiTagClip/NovaWifiTagClip.entitlements;
+				INFOPLIST_FILE = NovaWifiTagClip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ar.novasolutions.wifitag.Clip;
+				PRODUCT_NAME = NovaWifiTagClip;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		0FCB989B478FCDCC988B9081 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NovaWifiTagClip/NovaWifiTagClip.entitlements;
+				INFOPLIST_FILE = NovaWifiTagClip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ar.novasolutions.wifitag.Clip;
+				PRODUCT_NAME = NovaWifiTagClip;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		55342CECAA6245094B921583 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 2;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ABS5DYM6TB;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		BEBE09FE643288315FE88522 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 2;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = ABS5DYM6TB;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C344FA3195ED778DF27C9E13 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NovaWifiTag/NovaWifiTag.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = NovaWifiTag/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ar.novasolutions.wifitag;
+				PRODUCT_NAME = NovaWifiTag;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		DDBC22F1885D082B1C9F0D91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NovaWifiTag/NovaWifiTag.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = NovaWifiTag/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ar.novasolutions.wifitag;
+				PRODUCT_NAME = NovaWifiTag;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A51AE88917B8D74A9D22FABA /* Build configuration list for PBXNativeTarget "NovaWifiTagClip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FCB989B478FCDCC988B9081 /* Debug */,
+				016D5C1790ADECEB3E757034 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AF08716B737E90FA3BDE3006 /* Build configuration list for PBXProject "NovaWifiTag" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEBE09FE643288315FE88522 /* Debug */,
+				55342CECAA6245094B921583 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D589464EBCE238CF46A5B196 /* Build configuration list for PBXNativeTarget "NovaWifiTag" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDBC22F1885D082B1C9F0D91 /* Debug */,
+				C344FA3195ED778DF27C9E13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1780D77A2FD4279C460513F1 /* Project object */;
+}
