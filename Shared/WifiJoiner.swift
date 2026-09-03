@@ -8,6 +8,8 @@ enum WifiJoinError: LocalizedError {
     case notInForeground
     case pending
     case simulator
+    /// iOS aceptó la configuración pero el iPhone no quedó unido a esa red.
+    case notJoined(ssid: String)
     case failed(String)
 
     var errorDescription: String? {
@@ -24,6 +26,8 @@ enum WifiJoinError: LocalizedError {
             return "Ya hay una conexión en curso. Espera un momento e inténtalo de nuevo."
         case .simulator:
             return "El simulador no puede unirse a redes Wi-Fi. Pruébalo en un iPhone."
+        case .notJoined(let ssid):
+            return "El iPhone no logró unirse a «\(ssid)». Verifica que la red esté cerca, que la clave sea correcta y vuelve a intentarlo."
         case .failed(let detail):
             return detail
         }
@@ -42,29 +46,68 @@ enum WifiJoiner {
         #endif
     }
 
-    /// Aplica la configuración (`joinOnce = false`, la red queda guardada).
+    /// Aplica la configuración (`joinOnce = false`, la red queda guardada) y después
+    /// comprueba que el iPhone realmente haya quedado unido a ese SSID.
     /// `NEHotspotConfigurationError.alreadyAssociated` se considera éxito.
+    ///
+    /// La comprobación existe porque `apply` puede terminar sin error aunque iOS muestre
+    /// "No se pudo conectar a la red" (clave incorrecta, red fuera de alcance, SSID inexistente).
     static func join(_ credentials: TagCredentials) async throws {
         guard isSupported else { throw WifiJoinError.simulator }
 
         let configuration = try makeConfiguration(for: credentials)
         configuration.joinOnce = false
 
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+        let alreadyAssociated = try await apply(configuration)
+        if alreadyAssociated {
+            return
+        }
+        guard await waitUntilJoined(ssid: credentials.ssid) else {
+            // Limpia la configuración que no sirvió para que el próximo intento parta de cero.
+            NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: credentials.ssid)
+            throw WifiJoinError.notJoined(ssid: credentials.ssid)
+        }
+    }
+
+    /// Devuelve `true` si iOS respondió `alreadyAssociated` (ya estaba en esa red).
+    private static func apply(_ configuration: NEHotspotConfiguration) async throws -> Bool {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Bool, Error>) in
             NEHotspotConfigurationManager.shared.apply(configuration) { error in
                 guard let error else {
-                    continuation.resume()
+                    continuation.resume(returning: false)
                     return
                 }
                 let nsError = error as NSError
                 if nsError.domain == NEHotspotConfigurationErrorDomain,
                    nsError.code == NEHotspotConfigurationError.alreadyAssociated.rawValue {
-                    continuation.resume()
+                    continuation.resume(returning: true)
                 } else {
                     continuation.resume(throwing: Self.mapError(nsError))
                 }
             }
         }
+    }
+
+    /// SSID de la red Wi-Fi actual. Requiere el entitlement
+    /// `com.apple.developer.networking.wifi-info` (Access Wi-Fi Information) y que la app haya
+    /// configurado esa red con NEHotspotConfiguration; en cualquier otro caso devuelve `nil`.
+    static func currentSSID() async -> String? {
+        await withCheckedContinuation { (continuation: CheckedContinuation<String?, Never>) in
+            NEHotspotNetwork.fetchCurrent { network in
+                continuation.resume(returning: network?.ssid)
+            }
+        }
+    }
+
+    /// Consulta la red actual durante unos segundos hasta que coincida con `ssid`.
+    private static func waitUntilJoined(ssid: String, attempts: Int = 10) async -> Bool {
+        for _ in 0..<attempts {
+            if await currentSSID() == ssid {
+                return true
+            }
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+        }
+        return false
     }
 
     /// Construye la configuración validando antes los límites de iOS

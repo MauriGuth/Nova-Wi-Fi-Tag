@@ -70,8 +70,9 @@ Cómo está armado:
 
 - **Targets.** `NovaWifiTag` (`application`) embebe a `NovaWifiTagClip` (`application.on-demand-install-capable`) vía la dependencia del target; XcodeGen genera la fase *Embed App Clips*. iOS 16.0 mínimo, SwiftUI, sin dependencias externas, solo iPhone.
 - **Entitlements** (archivos `.entitlements` escritos a mano y referenciados desde `project.yml` con `CODE_SIGN_ENTITLEMENTS`; no se usa la clave `entitlements:` de XcodeGen porque regeneraría los archivos vacíos):
-  - App: `associated-appclip-app-identifiers`, `networking.HotspotConfiguration`, `nfc.readersession.formats = [NDEF, TAG]`, `associated-domains = [applinks:wifi.novasolutions.ar, applinks:wifi.novasolutions.ar?mode=developer]`.
-  - Clip: `parent-application-identifiers`, `associated-domains = [appclips:wifi.novasolutions.ar, appclips:wifi.novasolutions.ar?mode=developer]`, `networking.HotspotConfiguration`.
+  - App: `associated-appclip-app-identifiers`, `networking.HotspotConfiguration`, `networking.wifi-info`, `nfc.readersession.formats = [NDEF, TAG]`, `associated-domains = [applinks:wifi.novasolutions.ar, applinks:wifi.novasolutions.ar?mode=developer]`.
+  - Clip: `parent-application-identifiers`, `associated-domains = [appclips:wifi.novasolutions.ar, appclips:wifi.novasolutions.ar?mode=developer]`, `networking.HotspotConfiguration`, `networking.wifi-info`.
+  - `wifi-info` (Access Wi-Fi Information) se usa después de `apply` para comprobar con `NEHotspotNetwork.fetchCurrent` que el iPhone quedó unido al SSID pedido: `apply` puede terminar sin error aunque iOS muestre "No se pudo conectar a la red".
   - La entrada sin sufijo es la que usan TestFlight y App Store. La entrada `?mode=developer` solo la respetan los builds instalados desde Xcode en un iPhone con *Ajustes → Desarrollador → Associated Domains Development* activado: hace que el iPhone lea el AASA directo de tu servidor en vez de la CDN de Apple.
 - **Solo iPhone.** `TARGETED_DEVICE_FAMILY = 1` está puesto a nivel target (el preset iOS de XcodeGen pondría `1,2`); si algún día querés iPad, agregá las cuatro orientaciones en los Info.plist o App Store Connect rechaza el build (ITMS-90474).
 - **Info.plist.** La app declara `NFCReaderUsageDescription`; el clip declara `NSAppClip` con `NSAppClipRequestEphemeralUserNotification = false` y `NSAppClipRequestLocationConfirmation = false`.
@@ -98,7 +99,7 @@ Generar un tag nuevo (página + perfil + JSON):
 ```bash
 cd web
 pip3 install segno                      # una vez (QR)
-./gen.py --id casa --name "Wi-Fi de Mauri" --ssid IPLAN-925365-5G --password Huentelaf-1 --security WPA2 --org Mauri
+./gen.py --id casa --name "Wi-Fi de Mauri" --ssid IPLAN-Mauri-5.8GHz --password Huentelaf1 --security WPA2 --org Mauri
 ./gen.py --id demo --name "Red de prueba Nova" --ssid NovaDemo --password demo-2026-nova
 ```
 
@@ -128,8 +129,8 @@ Ya está desplegado en producción (ver "Verificación" al final).
 1. `xcodegen generate`; abrí `NovaWifiTag.xcodeproj`.
 2. *Xcode → Settings → Accounts*: iniciá sesión con la cuenta del Developer Program. Tiene que aparecer el equipo `ABS5DYM6TB`; si solo ves el Personal Team, la cuenta no es la del programa pago.
 3. En cada target, *Signing & Capabilities* tiene que mostrar *Automatically manage signing* con tu equipo y las capabilities que salen de los `.entitlements`:
-   - `NovaWifiTag`: Associated Domains, Hotspot Configuration, Near Field Communication Tag Reading, App Clip (identificador asociado).
-   - `NovaWifiTagClip`: Associated Domains, Hotspot Configuration, On Demand Install Capable (Xcode lo agrega solo para este tipo de target).
+   - `NovaWifiTag`: Associated Domains, Hotspot Configuration, Access Wi-Fi Information, Near Field Communication Tag Reading, App Clip (identificador asociado).
+   - `NovaWifiTagClip`: Associated Domains, Hotspot Configuration, Access Wi-Fi Information, On Demand Install Capable (Xcode lo agrega solo para este tipo de target).
 4. Xcode registra los App IDs `ar.novasolutions.wifitag` y `ar.novasolutions.wifitag.Clip` y habilita esas capabilities en el portal. Si ves *"Provisioning profile doesn't include the … entitlement"*, entrá a https://developer.apple.com/account/resources/identifiers/list, habilitá la capability faltante en el App ID y en Xcode tocá *Try Again*.
 
 ### 3. Probar en el iPhone
@@ -170,10 +171,10 @@ Ya está desplegado en producción (ver "Verificación" al final).
 
 ### 5. Grabar el sticker
 
-- **Con la app**: *Mis redes → + → nombre, SSID, clave, seguridad, Tag ID `casa` → Guardar → Grabar sticker*. Muestra los dos registros y el tamaño; con URL + Wi-Fi son 124 bytes (entra en NTAG213: 137 bytes). Acercá el sticker cuando iOS lo pida.
+- **Con la app**: *Mis redes → + → nombre, SSID `IPLAN-Mauri-5.8GHz`, clave, seguridad, Tag ID `casa` → Guardar → Grabar sticker*. Muestra los dos registros y el tamaño; con URL + Wi-Fi son 124 bytes (entra en NTAG213: 137 bytes). Acercá el sticker cuando iOS lo pida.
 - **Con NFC Tools** (iOS o Android): *Write → Add a record*:
   1. **URL**: `https://wifi.novasolutions.ar/t/casa` (tiene que ser el primer registro: iOS solo lanza el App Clip si el registro 1 es la URL).
-  2. **Wi-Fi network**: SSID `IPLAN-925365-5G`, autenticación WPA2-Personal, cifrado AES, clave `Huentelaf-1`.
+  2. **Wi-Fi network**: SSID `IPLAN-Mauri-5.8GHz`, autenticación WPA2-Personal, cifrado AES, clave `Huentelaf1`.
   3. *Write*.
 - Cuando el sticker esté grabado con el mensaje correcto, la app (o NFC Tools) lo lee y podés dejarlo de solo lectura si querés que nadie lo sobrescriba.
 
