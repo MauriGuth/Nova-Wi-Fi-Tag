@@ -10,7 +10,7 @@ options:
   bundleIdPrefix: ar.novasolutions
   deploymentTarget:
     iOS: "16.0"
-  xcodeVersion: "15.0"
+  xcodeVersion: "15.4"
   createIntermediateGroups: true
   generateEmptyDirectories: false
   groupSortPosition: top
@@ -56,8 +56,10 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: ar.novasolutions.wifitag
         PRODUCT_NAME: NovaWifiTag
         INFOPLIST_FILE: NovaWifiTag/Info.plist
-    entitlements:
-      path: NovaWifiTag/NovaWifiTag.entitlements
+        # Archivo escrito a mano (no usar `entitlements:` de XcodeGen: lo regeneraría vacío).
+        CODE_SIGN_ENTITLEMENTS: NovaWifiTag/NovaWifiTag.entitlements
+        # El preset iOS de XcodeGen pone "1,2" a nivel target; se fuerza iPhone acá.
+        TARGETED_DEVICE_FAMILY: "1"
     dependencies:
       # El App Clip se embebe en la app ("Embed App Clips").
       - target: NovaWifiTagClip
@@ -76,8 +78,8 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: ar.novasolutions.wifitag.Clip
         PRODUCT_NAME: NovaWifiTagClip
         INFOPLIST_FILE: NovaWifiTagClip/Info.plist
-    entitlements:
-      path: NovaWifiTagClip/NovaWifiTagClip.entitlements
+        CODE_SIGN_ENTITLEMENTS: NovaWifiTagClip/NovaWifiTagClip.entitlements
+        TARGETED_DEVICE_FAMILY: "1"
 
 schemes:
   NovaWifiTag:

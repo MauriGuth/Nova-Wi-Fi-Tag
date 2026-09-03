@@ -13,6 +13,7 @@ Seguridad: WPA2 (default), WPA2-WPA3, WPA-WPA2 u OPEN (sin clave).
 Requiere `segno` o `qrcode` para el QR:  pip3 install segno
 """
 import argparse
+import html
 import io
 import json
 import plistlib
@@ -53,7 +54,7 @@ def qr_svg(text: str) -> str:
 
 def wifi_qr_text(ssid: str, password: str, security: str) -> str:
     def esc(value: str) -> str:
-        for ch in "\;,\":":
+        for ch in '\\;,":':
             value = value.replace(ch, "\\" + ch)
         return value
     kind = SECURITY[security]["qr"]
@@ -108,18 +109,21 @@ def make_mobileconfig(tag_id: str, name: str, ssid: str, password: str, security
 def render_page(template: str, tag_id: str, name: str, ssid: str, password: str, security: str) -> str:
     has_password = SECURITY[security]["qr"] != "nopass"
     data = {"ssid": ssid, "pass": password if has_password else ""}
+    # JSON dentro de <script>: escapar < > & para que nunca cierre el script ni rompa el HTML.
+    safe_json = (json.dumps(data, ensure_ascii=False)
+                 .replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026"))
     replacements = {
-        "{{TITLE}}": name,
-        "{{SSID}}": ssid,
+        "{{TITLE}}": html.escape(name),
+        "{{SSID}}": html.escape(ssid),
         "{{PROFILE_HREF}}": f"/t/{tag_id}/wifi.mobileconfig",
         "{{QR_SVG}}": qr_svg(wifi_qr_text(ssid, password, security)),
-        "{{DATA_JSON}}": json.dumps(data, ensure_ascii=False),
+        "{{DATA_JSON}}": safe_json,
         "{{PASS_ROW_HIDDEN}}": "" if has_password else " hidden",
     }
-    html = template
+    page = template
     for key, value in replacements.items():
-        html = html.replace(key, value)
-    return html
+        page = page.replace(key, value)
+    return page
 
 
 def main() -> None:

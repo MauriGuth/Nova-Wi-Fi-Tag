@@ -57,7 +57,7 @@ assets/appclip-card-1800x1200.png   imagen para la App Clip Experience
 
 ## Parte A · Proyecto iOS
 
-Requisitos: Xcode 15 o 16, `brew install xcodegen`.
+Requisitos: Xcode 15.4 o posterior (por el `method = app-store-connect` de `ExportOptions.plist`; con un Xcode más viejo usá `app-store`), `brew install xcodegen`.
 
 ```bash
 scripts/set-team-id.sh ABCDE12345     # tu Team ID (una sola vez)
@@ -70,9 +70,11 @@ xcodebuild -project NovaWifiTag.xcodeproj -scheme NovaWifiTagClip -destination '
 Cómo está armado:
 
 - **Targets.** `NovaWifiTag` (`application`) embebe a `NovaWifiTagClip` (`application.on-demand-install-capable`) vía la dependencia del target; XcodeGen genera la fase *Embed App Clips*. iOS 16.0 mínimo, SwiftUI, sin dependencias externas, solo iPhone.
-- **Entitlements** (archivos `.entitlements` referenciados desde `project.yml`):
-  - App: `associated-appclip-app-identifiers`, `networking.HotspotConfiguration`, `nfc.readersession.formats = [NDEF]`, `associated-domains = applinks:wifi.novasolutions.ar`.
-  - Clip: `parent-application-identifiers`, `associated-domains = appclips:wifi.novasolutions.ar?mode=developer`, `networking.HotspotConfiguration`.
+- **Entitlements** (archivos `.entitlements` escritos a mano y referenciados desde `project.yml` con `CODE_SIGN_ENTITLEMENTS`; no se usa la clave `entitlements:` de XcodeGen porque regeneraría los archivos vacíos):
+  - App: `associated-appclip-app-identifiers`, `networking.HotspotConfiguration`, `nfc.readersession.formats = [NDEF, TAG]`, `associated-domains = [applinks:wifi.novasolutions.ar, applinks:wifi.novasolutions.ar?mode=developer]`.
+  - Clip: `parent-application-identifiers`, `associated-domains = [appclips:wifi.novasolutions.ar, appclips:wifi.novasolutions.ar?mode=developer]`, `networking.HotspotConfiguration`.
+  - La entrada sin sufijo es la que usan TestFlight y App Store. La entrada `?mode=developer` solo la respetan los builds instalados desde Xcode en un iPhone con *Ajustes → Desarrollador → Associated Domains Development* activado: hace que el iPhone lea el AASA directo de tu servidor en vez de la CDN de Apple.
+- **Solo iPhone.** `TARGETED_DEVICE_FAMILY = 1` está puesto a nivel target (el preset iOS de XcodeGen pondría `1,2`); si algún día querés iPad, agregá las cuatro orientaciones en los Info.plist o App Store Connect rechaza el build (ITMS-90474).
 - **Info.plist.** La app declara `NFCReaderUsageDescription`; el clip declara `NSAppClip` con `NSAppClipRequestEphemeralUserNotification = false` y `NSAppClipRequestLocationConfirmation = false`.
 - **Invocación.** El clip usa `.onContinueUserActivity(NSUserActivityTypeBrowsingWeb)` y lee `activity.webpageURL`. El scheme `NovaWifiTagClip` tiene la variable de entorno `_XCAppClipURL = https://wifi.novasolutions.ar/t/casa` para simular el tap desde Xcode. La app completa recibe la misma URL como enlace universal y abre la pantalla "Conectarme".
 - **App completa** (Apple exige que tenga todo lo que hace el clip): lista de redes guardada en el Keychain, "Conectarme" con el mismo código del clip y "Grabar sticker" con CoreNFC. Al grabar se muestra el tamaño del mensaje NDEF y avisa si supera los 137 bytes de un NTAG213 (el sticker `casa` con URL + Wi-Fi ocupa 124 bytes).
@@ -120,7 +122,7 @@ Ya está desplegado en producción (ver "Verificación" al final).
 1. Vercel → proyecto `wifi-tag` → *Settings → Domains* → **Add** `wifi.novasolutions.ar`.
 2. DNS de `novasolutions.ar`: `CNAME wifi → cname.vercel-dns.com`. (Hoy `wifi.novasolutions.ar` ya responde desde Vercel con `DEPLOYMENT_NOT_FOUND`, así que es probable que el CNAME ya exista y solo falte asignarlo al proyecto.)
 3. Verificá: `scripts/verify-web.sh https://wifi.novasolutions.ar`.
-4. Apple no lee el AASA desde tu servidor sino desde su CDN. Chequeá que lo tome (puede tardar hasta 24 h): `curl -s https://app-site-association.cdn-apple.com/a/v1/wifi.novasolutions.ar`. Mientras tanto, para probar en tu iPhone, activá *Ajustes → Desarrollador → Associated Domains Development* (por eso el clip lleva `?mode=developer`).
+4. Apple no lee el AASA desde tu servidor sino desde su CDN. Chequeá que lo tome (puede tardar hasta 24 h): `curl -s https://app-site-association.cdn-apple.com/a/v1/wifi.novasolutions.ar`. Mientras tanto, para probar en tu iPhone con builds de Xcode (clip y app), activá *Ajustes → Desarrollador → Associated Domains Development* (para eso están las entradas `?mode=developer` de los entitlements).
 
 ### 2. Xcode: cuenta y capabilities
 
@@ -138,7 +140,7 @@ Ya está desplegado en producción (ver "Verificación" al final).
   1. Dejá el clip instalado desde Xcode.
   2. *Ajustes → Desarrollador → Local Experiences → Register Local Experience*: URL Prefix `https://wifi.novasolutions.ar/t/casa`, Bundle ID `ar.novasolutions.wifitag.Clip`, título "Nova Wi-Fi", subtítulo "Conectate al Wi-Fi", acción **Open**, y una imagen cualquiera.
   3. Grabá el sticker (paso 5) y acercá el iPhone con la pantalla encendida: aparece la tarjeta del clip → *Abrir* → *Conectarme*.
-  4. Para probar el enlace universal en la app completa: instalá el scheme `NovaWifiTag` y volvé a tocar el sticker; abre la app directo en "Conectarme".
+  4. Para probar el enlace universal en la app completa: instalá el scheme `NovaWifiTag` (con *Associated Domains Development* activado, o esperá a que la CDN de Apple tenga el AASA) y volvé a tocar el sticker; abre la app directo en "Conectarme".
 - Si en vez de la tarjeta se abre Safari: revisá que el primer registro NDEF sea la URL, que la Local Experience esté registrada con la URL exacta y que el iPhone sea XS o posterior (lectura NFC en segundo plano).
 
 ### 4. App Store Connect
@@ -186,4 +188,5 @@ Ya está desplegado en producción (ver "Verificación" al final).
 
 - El JSON de `/api/tags/<id>.json` es público, igual que la página de fallback: cualquiera con la URL ve la clave. Si querés reducir exposición, usá tagIds no adivinables (`gen.py --id casa-7f3a9`) o cambiá la clave del Wi-Fi periódicamente y regenerá.
 - Para que la app y el clip acepten un tagId nuevo, alcanza con generar sus archivos con `gen.py` y hacer deploy: el clip no tiene nada hardcodeado por tag.
-- `?mode=developer` en el associated domain del clip solo afecta a builds instalados desde Xcode; TestFlight y App Store lo ignoran, así que podés dejarlo.
+- Las entradas `?mode=developer` de los associated domains solo las usan los builds instalados desde Xcode; TestFlight y App Store usan las entradas sin sufijo. Podés dejar las dos.
+- Revisión estática del código: además del typecheck en Linux, el Swift, el `project.yml`, los plist y el backend pasaron por una ronda de revisores independientes (SwiftUI/iOS 16, CoreNFC, NetworkExtension, XcodeGen, App Clip, WSC, Vercel) con verificación cruzada contra la documentación de Apple/XcodeGen; lo confirmado ya está corregido. Igual, la prueba real es `scripts/build-sim.sh` en tu Mac y el tap en el iPhone.
