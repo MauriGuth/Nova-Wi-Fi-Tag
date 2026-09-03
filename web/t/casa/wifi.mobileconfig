@@ -19,7 +19,7 @@
 			<key>IsHotspot</key>
 			<false/>
 			<key>Password</key>
-			<string>Huentelaf-1</string>
+			<string>Huentelaf1</string>
 			<key>PayloadDescription</key>
 			<string>Agrega la red Wi-Fi “IPLAN-925365-5G” y se conecta automáticamente.</string>
 			<key>PayloadDisplayName</key>
