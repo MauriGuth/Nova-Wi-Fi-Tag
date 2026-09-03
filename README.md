@@ -20,12 +20,12 @@ Tag de prueba: `casa`. Tag de demo para el revisor de App Store: `demo` (red fic
 
 | Parte | Qué hay | Qué te falta hacer |
 |---|---|---|
-| A · iOS | `project.yml` (XcodeGen), app `NovaWifiTag`, clip `NovaWifiTagClip`, código en `Shared/`, entitlements, Info.plist, íconos | Poner tu **Team ID**, `xcodegen generate`, compilar en tu Mac |
-| B · Web | `web/` desplegado en producción en el proyecto Vercel `wifi-tag` (AASA, `/t/casa`, `/api/tags/casa.json`, `gen.py`) | Asignar el dominio `wifi.novasolutions.ar`, redeploy con el Team ID real |
+| A · iOS | `project.yml` (XcodeGen), app `NovaWifiTag`, clip `NovaWifiTagClip`, código en `Shared/`, entitlements, Info.plist, íconos, Team ID `ABS5DYM6TB` | `xcodegen generate` y compilar en tu Mac |
+| B · Web | `web/` desplegado en producción en el proyecto Vercel `wifi-tag` (AASA con el Team ID real, `/t/casa`, `/api/tags/casa.json`, `gen.py`) | Asignar el dominio `wifi.novasolutions.ar` |
 | C · Manual | Este README, `ExportOptions.plist`, scripts en `scripts/`, imagen 1800×1200 en `assets/` | Pasos 1–5 de abajo |
 
-> **Team ID.** No lo tenía, así que quedó el placeholder literal `TEAMID` en `project.yml`, `ExportOptions.plist` y `web/.well-known/apple-app-site-association`.
-> Lo reemplazás en un paso: `scripts/set-team-id.sh ABCDE12345` (lo ves en https://developer.apple.com/account → Membership details).
+> **Team ID.** Ya está configurado `ABS5DYM6TB` (el de *Membership details* en https://developer.apple.com/account) en `project.yml`, `ExportOptions.plist` y `web/.well-known/apple-app-site-association`.
+> En Xcode elegí el equipo que muestra ese ID, no el "Personal Team" (`ZN8QX5WGT3`) que aparece en el certificado gratuito. Si algún día cambia, `scripts/set-team-id.sh <ID>` lo reemplaza en los tres archivos.
 
 ## Estructura
 
@@ -60,8 +60,7 @@ assets/appclip-card-1800x1200.png   imagen para la App Clip Experience
 Requisitos: Xcode 15.4 o posterior (por el `method = app-store-connect` de `ExportOptions.plist`; con un Xcode más viejo usá `app-store`), `brew install xcodegen`.
 
 ```bash
-scripts/set-team-id.sh ABCDE12345     # tu Team ID (una sola vez)
-xcodegen generate                      # crea NovaWifiTag.xcodeproj
+xcodegen generate                      # crea NovaWifiTag.xcodeproj (el Team ID ya está en project.yml)
 xcodebuild -project NovaWifiTag.xcodeproj -scheme NovaWifiTag     -destination 'generic/platform=iOS Simulator' build CODE_SIGNING_ALLOWED=NO
 xcodebuild -project NovaWifiTag.xcodeproj -scheme NovaWifiTagClip -destination 'generic/platform=iOS Simulator' build CODE_SIGNING_ALLOWED=NO
 # o todo junto: scripts/build-sim.sh
@@ -126,8 +125,8 @@ Ya está desplegado en producción (ver "Verificación" al final).
 
 ### 2. Xcode: cuenta y capabilities
 
-1. `scripts/set-team-id.sh <TEAMID>` y `xcodegen generate`; abrí `NovaWifiTag.xcodeproj`.
-2. *Xcode → Settings → Accounts*: iniciá sesión con la cuenta del Developer Program.
+1. `xcodegen generate`; abrí `NovaWifiTag.xcodeproj`.
+2. *Xcode → Settings → Accounts*: iniciá sesión con la cuenta del Developer Program. Tiene que aparecer el equipo `ABS5DYM6TB`; si solo ves el Personal Team, la cuenta no es la del programa pago.
 3. En cada target, *Signing & Capabilities* tiene que mostrar *Automatically manage signing* con tu equipo y las capabilities que salen de los `.entitlements`:
    - `NovaWifiTag`: Associated Domains, Hotspot Configuration, Near Field Communication Tag Reading, App Clip (identificador asociado).
    - `NovaWifiTagClip`: Associated Domains, Hotspot Configuration, On Demand Install Capable (Xcode lo agrega solo para este tipo de target).

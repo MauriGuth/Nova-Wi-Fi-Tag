@@ -3,7 +3,7 @@
 #   brew install xcodegen      # si falta
 #   xcodegen generate          # crea NovaWifiTag.xcodeproj
 #
-# Reemplazá TEAMID por tu Team ID de Apple Developer (scripts/set-team-id.sh XXXXXXXXXX).
+# Reemplazá ABS5DYM6TB por tu Team ID de Apple Developer (scripts/set-team-id.sh XXXXXXXXXX).
 name: NovaWifiTag
 
 options:
@@ -25,7 +25,7 @@ settings:
     SWIFT_VERSION: "5.0"
     IPHONEOS_DEPLOYMENT_TARGET: "16.0"
     TARGETED_DEVICE_FAMILY: "1"
-    DEVELOPMENT_TEAM: TEAMID
+    DEVELOPMENT_TEAM: ABS5DYM6TB
     CODE_SIGN_STYLE: Automatic
     MARKETING_VERSION: "1.0.0"
     CURRENT_PROJECT_VERSION: "1"
