@@ -3,3 +3,5 @@ templates/
 README.md
 __pycache__/
 *.pyc
+.env*
+.vercel/
