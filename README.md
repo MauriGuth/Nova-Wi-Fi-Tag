@@ -177,6 +177,7 @@ Ya está desplegado en producción (ver "Verificación" al final).
   2. **Wi-Fi network**: SSID `IPLAN-Mauri-5.8GHz`, autenticación WPA2-Personal, cifrado AES, clave `Huentelaf1`.
   3. *Write*.
 - Cuando el sticker esté grabado con el mensaje correcto, la app (o NFC Tools) lo lee y podés dejarlo de solo lectura si querés que nadie lo sobrescriba.
+- **Sin internet no hay App Clip.** El iPhone necesita datos para bajar el clip y el JSON; Android en cambio se conecta con lo que hay en el sticker. Para cubrir iPhones sin señal, imprimí al lado del sticker el QR que genera `gen.py` en `web/t/<tagId>/qr.png`: la app Cámara lo lee sin conexión y ofrece unirse a la red.
 
 ## Verificación
 

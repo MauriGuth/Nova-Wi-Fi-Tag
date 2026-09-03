@@ -3,6 +3,7 @@
 
     t/<tagId>/index.html          página de fallback (Android / desktop / iPhone sin App Clip)
     t/<tagId>/wifi.mobileconfig   perfil Wi-Fi para iOS
+    t/<tagId>/qr.svg y qr.png     QR Wi-Fi imprimible (la Cámara del iPhone lo lee sin internet)
     api/tags/<tagId>.json         credenciales que consume el App Clip
 
 Uso:
@@ -50,6 +51,20 @@ def qr_svg(text: str) -> str:
         return img.to_string().decode("utf-8")
     except ImportError:
         sys.exit("Falta una librería para el QR: pip3 install segno")
+
+
+def save_qr_files(text: str, tag_dir: Path) -> list:
+    """Guarda qr.svg y qr.png imprimibles (la Cámara del iPhone los lee sin internet)."""
+    written = []
+    try:
+        import segno
+        qr = segno.make(text, error="m")
+        qr.save(str(tag_dir / "qr.svg"), kind="svg", scale=10, border=2, dark="#000000", light="#ffffff")
+        qr.save(str(tag_dir / "qr.png"), kind="png", scale=20, border=2, dark="#000000", light="#ffffff")
+        written = [tag_dir / "qr.svg", tag_dir / "qr.png"]
+    except ImportError:
+        pass
+    return written
 
 
 def wifi_qr_text(ssid: str, password: str, security: str) -> str:
@@ -167,7 +182,9 @@ def main() -> None:
     }
     (api_dir / f"{tag_id}.json").write_text(json.dumps(api, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    for path in (tag_dir / "index.html", tag_dir / "wifi.mobileconfig", api_dir / f"{tag_id}.json"):
+    qr_files = save_qr_files(wifi_qr_text(args.ssid, args.password, args.security), tag_dir)
+
+    for path in [tag_dir / "index.html", tag_dir / "wifi.mobileconfig", api_dir / f"{tag_id}.json"] + qr_files:
         print(f"  {path.relative_to(out)}  ({path.stat().st_size} bytes)")
     print(f"URL del sticker:   https://{HOST}/t/{tag_id}")
     print(f"API del App Clip:  https://{HOST}/api/tags/{tag_id}.json")
