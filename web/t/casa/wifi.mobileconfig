@@ -5,7 +5,7 @@
 	<key>ConsentText</key>
 	<dict>
 		<key>default</key>
-		<string>Este perfil solo agrega la red Wi-Fi “IPLAN-925365-5G” a tu iPhone. No instala nada más y puedes eliminarlo cuando quieras desde Ajustes → General → VPN y gestión de dispositivos.</string>
+		<string>Este perfil solo agrega la red Wi-Fi “IPLAN-Mauri-5.8GHz” a tu iPhone. No instala nada más y puedes eliminarlo cuando quieras desde Ajustes → General → VPN y gestión de dispositivos.</string>
 	</dict>
 	<key>PayloadContent</key>
 	<array>
@@ -21,9 +21,9 @@
 			<key>Password</key>
 			<string>Huentelaf1</string>
 			<key>PayloadDescription</key>
-			<string>Agrega la red Wi-Fi “IPLAN-925365-5G” y se conecta automáticamente.</string>
+			<string>Agrega la red Wi-Fi “IPLAN-Mauri-5.8GHz” y se conecta automáticamente.</string>
 			<key>PayloadDisplayName</key>
-			<string>Red Wi-Fi IPLAN-925365-5G</string>
+			<string>Red Wi-Fi IPLAN-Mauri-5.8GHz</string>
 			<key>PayloadIdentifier</key>
 			<string>ar.novasolutions.wifi.casa.wifi</string>
 			<key>PayloadOrganization</key>
@@ -37,11 +37,11 @@
 			<key>ProxyType</key>
 			<string>None</string>
 			<key>SSID_STR</key>
-			<string>IPLAN-925365-5G</string>
+			<string>IPLAN-Mauri-5.8GHz</string>
 		</dict>
 	</array>
 	<key>PayloadDescription</key>
-	<string>Instala este perfil para conectarte a la red Wi-Fi “IPLAN-925365-5G” sin escribir la clave.</string>
+	<string>Instala este perfil para conectarte a la red Wi-Fi “IPLAN-Mauri-5.8GHz” sin escribir la clave.</string>
 	<key>PayloadDisplayName</key>
 	<string>Wi-Fi de Mauri</string>
 	<key>PayloadIdentifier</key>
